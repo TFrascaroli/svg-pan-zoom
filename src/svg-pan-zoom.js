@@ -30,6 +30,7 @@ var optionsDefaults = {
 , customEventsHandler: null
 , eventsListenerElement: null
 , onUpdatedCTM: null
+, mouseHandle: null // Added an option to restrict the mouse interactions to a certain element (in most cases, the SVGSVGElement)
 }
 
 SvgPanZoom.prototype.init = function(svg, options) {
@@ -107,11 +108,13 @@ SvgPanZoom.prototype.setupHandlers = function() {
   this.eventListeners = {
     // Mouse down group
     mousedown: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       var result = that.handleMouseDown(evt, prevEvt);
       prevEvt = evt
       return result;
     }
   , touchstart: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       var result = that.handleMouseDown(evt, prevEvt);
       prevEvt = evt
       return result;
@@ -119,28 +122,35 @@ SvgPanZoom.prototype.setupHandlers = function() {
 
     // Mouse up group
   , mouseup: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseUp(evt);
     }
   , touchend: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseUp(evt);
     }
 
     // Mouse move group
   , mousemove: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseMove(evt);
     }
   , touchmove: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseMove(evt);
     }
 
     // Mouse leave group
   , mouseleave: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseUp(evt);
     }
   , touchleave: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseUp(evt);
     }
   , touchcancel: function(evt) {
+      if (that.options.mouseHandle !== null && evt.target !== that.options.mouseHandle) return;
       return that.handleMouseUp(evt);
     }
   }
