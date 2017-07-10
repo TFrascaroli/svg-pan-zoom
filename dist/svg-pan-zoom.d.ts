@@ -54,6 +54,11 @@ declare namespace SvgPanZoom {
     onUpdatedCTM?: (newCTM: SVGMatrix) => void;
     customEventsHandler?: CustomEventHandler; // (default null)
     eventsListenerElement?: SVGElement; // (default null)
+    /**
+     * Restricts the mouse events to be exactly on the element defined by eventsListenerElement
+     * @type {boolean}
+     */
+    restrictEventsListenerEvent?: boolean;
   }
 
   interface CustomEventHandler {
